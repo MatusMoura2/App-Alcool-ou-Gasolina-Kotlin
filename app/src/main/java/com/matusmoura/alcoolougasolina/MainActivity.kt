@@ -6,11 +6,11 @@ import android.view.View
 import android.widget.TextView
 import com.google.android.material.textfield.TextInputEditText
 
-class MainActivity : AppCompatActivity() {
+abstract class MainActivity : AppCompatActivity() {
 
-    private var  alcoolPrice:TextInputEditText = TODO()
-    private var  gasolinePrice:TextInputEditText = TODO()
-    private var  result:TextView = TODO()
+    abstract var  alcoolPrice:TextInputEditText
+    abstract var  gasolinePrice:TextInputEditText
+    abstract var  result:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
