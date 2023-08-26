@@ -8,48 +8,35 @@ import com.google.android.material.textfield.TextInputEditText
 
 abstract class MainActivity : AppCompatActivity() {
 
-    abstract var  alcoolPrice:TextInputEditText
-    abstract var  gasolinePrice:TextInputEditText
-    abstract var  result:TextView
+    abstract var editPriceAlcool:    TextInputEditText
+    abstract var editPriceGasoline:  TextInputEditText
+    abstract var resultCalc:         TextView
+
+    fun validation(pAlcool: String, pGasoline: String):Boolean{
+        var campOk = true
+
+        if(pAlcool == null || pAlcool.equals("") || pGasoline == null || pGasoline.equals("")){
+            campOk = false
+        }
+
+
+        return campOk
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        alcoolPrice = findViewById(R.id.alcoolPrice)
-        gasolinePrice = findViewById(R.id.gasolinePrice)
-        result = findViewById(R.id.textResult)
+        editPriceAlcool     = findViewById(R.id.idAlcoolPrice)
+        editPriceGasoline   = findViewById(R.id.idGasolinePrice)
+        resultCalc          = findViewById(R.id.textResult)
+
+        fun calculatePrice(view: View): Unit{
+            var priceAlcool    = editPriceAlcool.text.toString()
+            var priceGasoline  = editPriceGasoline.text.toString()
+
+            var teste: Boolean = validation(priceAlcool, priceGasoline)
 
 
-    }
-
-    fun Calculation(view: View){
-        var alcoolPrice:String = alcoolPrice.text.toString()
-        var gasolinePrice:String = gasolinePrice.text.toString()
-
-       var campOk: Boolean = okCamp(gasolinePrice,alcoolPrice)
-        if (campOk){
-            var alcoolValue: Double = alcoolPrice.toDouble()
-            var gasolineValue: Double = gasolinePrice.toDouble()
-
-            val ratio: Double = alcoolValue / gasolineValue
-
-            if (ratio < 0.7) {
-                result.setText("Melhor opção: Álcool")
-            } else {
-                result.setText("Melhor opção: Gasolina")
-            }
-
-        }else {
-            result.setText("Preenca todos os campos de preços!")
         }
-
-    }
-
-    fun okCamp (pAlcool: String, pGasoline: String ):Boolean{
-        var campOK: Boolean = true
-
-        if (pAlcool == null || pAlcool.equals("") || pGasoline == null || pGasoline.equals(""))
-            campOK = false
-        return campOK
     }
 }
